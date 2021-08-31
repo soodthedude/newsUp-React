@@ -1,25 +1,124 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react'
+import Navbar from './components/Navbar';
+import News from './components/News';
+import LoadingBar from "react-top-loading-bar";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  
+} from "react-router-dom";
+
+export default class App extends Component {
+  pageSize = 12;
+  apiKey = process.env.REACT_APP_NEWS_API
+  state = {
+    progress: 0,
+  };
+
+  setProgress = (progress) => {
+    this.setState({ progress: progress });
+  };
+  render() {
+    return (
+      <div>
+        <Router>
+          <Navbar />
+          <LoadingBar
+            height={4}
+            color="#f11946"
+            progress={this.state.progress}
+          />
+          <Switch>
+            <Route exact path="/">
+              <News
+                setProgress={this.setProgress}
+                key="general"
+                apiKey={this.apiKey}
+                pageSize={this.pageSize}
+                country="in"
+                category="general"
+              />
+            </Route>
+            <Route exact path="/business">
+              <News
+                setProgress={this.setProgress}
+                key="business"
+                apiKey={this.apiKey}
+                pageSize={this.pageSize}
+                country="in"
+                category="business"
+              />
+            </Route>
+            <Route exact path="/entertainment">
+              <News
+                setProgress={this.setProgress}
+                key="entertainment"
+                apiKey={this.apiKey}
+                pageSize={this.pageSize}
+                country="in"
+                category="entertainment"
+              />
+            </Route>
+            <Route exact path="/general">
+              <News
+                setProgress={this.setProgress}
+                key="general"
+                apiKey={this.apiKey}
+                pageSize={this.pageSize}
+                country="in"
+                category="general"
+              />
+            </Route>
+            <Route exact path="/health">
+              <News
+                setProgress={this.setProgress}
+                key="health"
+                apiKey={this.apiKey}
+                pageSize={this.pageSize}
+                country="in"
+                category="health"
+              />
+            </Route>
+            <Route exact path="/science">
+              <News
+                setProgress={this.setProgress}
+                key="science"
+                apiKey={this.apiKey}
+                pageSize={this.pageSize}
+                country="in"
+                category="science"
+              />
+            </Route>
+            <Route exact path="/sports">
+              <News
+                setProgress={this.setProgress}
+                key="sports"
+                apiKey={this.apiKey}
+                pageSize={this.pageSize}
+                country="in"
+                category="sports"
+              />
+            </Route>
+            <Route exact path="/technology">
+              <News
+                setProgress={this.setProgress}
+                key="technology"
+                apiKey={this.apiKey}
+                pageSize={this.pageSize}
+                country="in"
+                category="technology"
+              />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
 
-export default App;
+
+
